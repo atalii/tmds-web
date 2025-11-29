@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>TMDS Demo</title>
+	<link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+	<main>
+		<p>
+			TMDS, or <b>Transition-Minimized Differential
+			Signaling,</b> is a core component of the protocol
+			used in DVI, giving us a robust way to send pixels
+			and control signals over a DVI or HDMI link. The
+			component we focus on here takes an arbitrary 8-bit
+			byte and passes it through some manipulation to turn
+			it into a 10-bit sequence with properties better
+			suited for the wire.
+		</p>
+		<p>
+			For more information on TMDS, consult the <a
+			href="https://glenwing.github.io/docs/DVI-1.0.pdf">DVI
+			spec,</a> and in particular see §3.2.
+		</p> 
+
+		<h1>TMDS Demo</h1>
+		<div class="demo">
+			<form class="input-bytes" id="input-bytes" action="javascript:void(0)">
+				<div class="data">
+					<label for="d"><span title="8-bit input">D[7:0]</span></label>
+					<input type="text" id="data-d" name="d"/>
+					<input type="submit" value="Feed"/>
+				</div>
+				<div class="input-bytes-info">
+					Enter a number of the form
+					<code>0bXXXXXXXX</code>,
+					<code>0xXX</code>, or a decimal
+					number.
+				</div>
+			</div>
+			<table id="content">
+				<thead id="contenthead">
+					<tr>
+						<th scope="col">Input</th>
+						<th scope="col">One-dominated?</th>
+						<th scope="col">Output</th>
+						<th scope="col" class="bias">New Bias</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</main>
+	<script src="src/main.ts" type="module"></script>
+</body>
+</html>
