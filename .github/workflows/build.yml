@@ -23,11 +23,9 @@ jobs:
       - uses: actions/setup-node@v6
       - run: npm install --prefix web
       - run: npm run build --prefix web
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-pages-artifact@v4
         with:
-          name: github-pages
           path: web/dist
-          if-no-files-found: error
   deploy:
     needs: build
     runs-on: ubuntu-latest
