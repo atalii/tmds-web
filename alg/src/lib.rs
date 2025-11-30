@@ -14,6 +14,7 @@ pub struct TmdsVal {
 }
 
 #[wasm_bindgen]
+#[derive(Debug, Eq, PartialEq)]
 pub enum ParseError {
     Overflow,
     IllegalChar,
@@ -31,6 +32,18 @@ pub fn parse_byte(input: &str) -> Result<u8, ParseError> {
 
             val <<= 4;
             val += c.to_digit(16).ok_or(ParseError::IllegalChar)? as u8;
+        }
+
+        Ok(val)
+    } else if let Some(input) = input.strip_prefix("0b") {
+        let mut val: u8 = 0;
+        for c in input.chars() {
+            if val & 0x80 != 0 {
+                return Err(ParseError::Overflow);
+            }
+
+            val <<= 1;
+            val += c.to_digit(2).ok_or(ParseError::IllegalChar)? as u8;
         }
 
         Ok(val)

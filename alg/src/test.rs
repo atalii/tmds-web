@@ -1,4 +1,16 @@
-use super::State;
+use super::{State, parse_byte, ParseError};
+
+#[test]
+fn parse_valid_inputs() {
+    assert_eq!(parse_byte("0b11"), Ok(0b11));
+    assert_eq!(parse_byte("0x11"), Ok(0x11));
+}
+
+#[test]
+fn parse_overflow() {
+    assert_eq!(parse_byte("0x111111111"), Err(ParseError::Overflow));
+    assert_eq!(parse_byte("0xfff"), Err(ParseError::Overflow));
+}
 
 // These tests come from
 // https://github.com/projf/display_controller/blob/master/model/tmds-test-python.txt (MIT
