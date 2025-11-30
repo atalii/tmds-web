@@ -37,8 +37,7 @@ form.input-bytes > div.data > input[type="text"] {
 	flex-grow: 1;
 }
 
-form.input-bytes > div.data > input[type="submit"] {
-	float: right;
+form.input-bytes > div.data > input[type="submit"], input[type="button"] {
 	padding-left: 2rem;
 	padding-right: 2rem;
 }

@@ -530,3 +530,14 @@ fn sequential() {
     assert_eq!(state.cnt, 8);
     assert_eq!(state.convert(0b11111111).repr, 0b1000000000);
 }
+
+#[test]
+fn rst() {
+    let mut s = State::new();
+    for i in 0x00..0xff {
+        s.rst();
+        let f = s.convert(i).repr;
+        s.rst();
+        assert_eq!(s.convert(i).repr, f);
+    }
+}

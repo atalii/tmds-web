@@ -27,4 +27,15 @@ function runEncode(_: Event) {
 	}
 }
 
+function runClick(_: Event) {
+	st.rst()
+
+	document.querySelector("#contenthead")!.insertAdjacentHTML("afterend", `
+	  <tr>
+	    <td colspan="4" class="bias"><code>${st.cnt}</code></td>
+	  </tr>
+	`)
+}
+
 document.querySelector("#input-bytes")!.addEventListener("submit", runEncode)
+document.querySelector("#rst")!.addEventListener("click", runClick)

@@ -7,6 +7,7 @@ use wasm_bindgen::prelude::*;
 mod test;
 
 #[wasm_bindgen]
+#[derive(Debug)]
 pub struct TmdsVal {
     /// Our first decision on the flowchart; whether ones or zeros 'dominate' the number.
     pub one_dominated: bool,
@@ -61,6 +62,10 @@ pub struct State {
 impl State {
     pub fn new() -> Self {
         Self { cnt: 0, }
+    }
+
+    pub fn rst(&mut self) {
+        self.cnt = 0;
     }
 
     pub fn convert(&mut self, x: u8) -> TmdsVal {
