@@ -1,6 +1,8 @@
 #![no_std]
 
 use core::result::Result;
+use core::num::IntErrorKind;
+
 use wasm_bindgen::prelude::*;
 
 #[cfg(test)]
@@ -49,7 +51,10 @@ pub fn parse_byte(input: &str) -> Result<u8, ParseError> {
 
         Ok(val)
     } else {
-        Err(ParseError::UnrecognizedFormat)
+        input.parse::<u8>().map_err(|e| match e.kind() {
+            IntErrorKind::PosOverflow | IntErrorKind::NegOverflow => ParseError::Overflow,
+            _ => ParseError::IllegalChar,
+        })
     }
 }
 
